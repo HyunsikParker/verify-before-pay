@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>VerifyBeforePay</title><link rel="stylesheet" href="./style.css"><script type="module" src="./app.js"></script>
+</head>
+<body>
+<header><strong>VerifyBeforePay</strong><span>BROWSER-LOCAL · FORGEHACKS 2026</span></header>
+<main>
+<h1>Check the request before you act.</h1>
+<p class="intro">Read the warning signs, inspect the real link host, and plan an independent check.</p>
+<div class="workspace">
+<section aria-labelledby="input-heading">
+<h2 id="input-heading">1. Examine a message</h2>
+<p>Text stays in this browser. Links are never opened.</p>
+<form id="analysis-form">
+<label for="message">Message text</label>
+<textarea id="message" name="message" maxlength="8192" rows="9" required placeholder="Paste the request you want to check."></textarea>
+<div class="row"><button type="button" id="example">Use a fictional example</button><button type="button" id="clear">Clear</button></div>
+<label for="domain">Expected organization domain <span>(optional)</span></label>
+<input id="domain" name="domain" type="text" maxlength="253" placeholder="bank.example" aria-describedby="domain-help">
+<p id="domain-help" class="help">Use a domain you already know from an independent source. A matching domain does not verify the sender.</p>
+<button type="submit" class="primary" id="analyze" disabled>Loading local analysis…</button>
+<p id="runtime-status" class="help" role="status">Downloading the Python runtime and fixed model. No message is sent.</p>
+<p id="error" class="error" role="alert" hidden></p>
+</form>
+</section>
+<section aria-labelledby="result-heading">
+<h2 id="result-heading">2. Review the evidence</h2>
+<div id="empty"><p>Results appear here after you examine a message.</p><p>Even a low model score cannot establish that a message is safe.</p></div>
+<div id="result" aria-live="polite" hidden></div>
+</section>
+</div>
+<aside><h2>What this prototype can tell you</h2><p>A small model flags language associated with older English SMS spam. Separate checks show observable request wording and link hosts. Neither check authenticates a sender, detects voice deepfakes, or establishes whether a payment is legitimate.</p><p>Only app files are downloaded. Analysis uses no external inference, analytics, cookies, or message storage. Clear removes the input and results from the interface; it is not a secure memory wipe.</p></aside>
+</main>
+<footer>Built during ForgeHacks, October 2026. AI-assisted code. SMS model: Almeida &amp; Hidalgo, UCI SMS Spam Collection (2011), CC BY 4.0. Python runtime: Pyodide 314.0.7.</footer>
+</body>
+</html>
