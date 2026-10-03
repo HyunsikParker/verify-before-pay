@@ -13,3 +13,7 @@ The files in `docs/vendor/pyodide/` are an unmodified subset of the official [Py
 The runtime embeds CPython 3.14.2 and uses Emscripten 5.0.3. Their notices are included as `CPYTHON-LICENSE` and `EMSCRIPTEN-LICENSE` in the same directory. Source: [CPython v3.14.2](https://github.com/python/cpython/tree/v3.14.2) and [Emscripten 5.0.3](https://github.com/emscripten-core/emscripten/tree/5.0.3). Those files retain the upstream copyright and license text.
 
 The runtime is self-hosted with the app. This project does not fetch optional Python packages or use Pyodide's package installer.
+
+## Functional video
+
+The walkthrough uses screenshots of the publicly deployed VerifyBeforePay app and its public README. Its fictional examples and narration script were written for this project. Speech was generated with [eSpeak NG 1.52.0](https://github.com/espeak-ng/espeak-ng/tree/1.52.0), an open-source formant synthesizer, rather than a cloned person or Apple system voice. The GPL-3.0-or-later synthesis engine is not bundled in the app. Video editing used FFmpeg. The transcript and English captions are included beside the MP4.

@@ -4,6 +4,8 @@ VerifyBeforePay helps someone pause and inspect a suspicious request before send
 
 The sender always remains **unverified**. A low spam score, HTTPS, or a matching domain does not mean that a message is safe. The app never visits pasted links.
 
+[Watch the public functional walkthrough (3:19)](https://hyunsikparker.github.io/verify-before-pay/walkthrough.html). It shows the working browser app with fictional messages and synthetic narration. The edited walkthrough is not a continuous recording; its transcript and captions are provided with the video.
+
 ## Browser demo
 
 [Open VerifyBeforePay](https://hyunsikparker.github.io/verify-before-pay/). The page downloads its Python runtime, fixed model, and app files from the same static site. After loading, the unchanged Python analysis code runs in the browser through Pyodide. Message text is not uploaded, pasted links are not visited, and no external inference service is used.

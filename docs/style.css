@@ -1,4 +1,5 @@
 :root{color-scheme:light;--ink:#171717;--muted:#555;--line:#ccc;--paper:#fff;--wash:#f3f3f3;--warning:#7b2e0a;--focus:#075baf}
+video{display:block;width:100%;height:auto;max-height:75vh;background:#171717}a{color:#075baf;overflow-wrap:anywhere}a:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 header{display:flex;justify-content:space-between;gap:1rem;align-items:center;border-bottom:1px solid var(--line);padding:1.25rem 4vw}header strong{font-size:1.1rem}header span{font-size:.75rem;letter-spacing:.08em;color:var(--muted)}
 main{max-width:1150px;margin:auto;padding:2.5rem 2rem}h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.15;letter-spacing:-.03em;margin:0 0 .75rem}h2{font-size:1.1rem;line-height:1.4;margin:0 0 .6rem}h3{font-size:1rem;margin:1.3rem 0 .3rem}.intro{color:var(--muted);max-width:700px;margin:0 0 2rem}
