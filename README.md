@@ -38,6 +38,8 @@ The model is multinomial Naive Bayes with word and bigram features and fixed Lap
 
 Separate checks extract the actual URL host, identify user information before a host, compare it with an independently supplied expected domain, and show observed urgency, credential, payment, or secrecy wording. Context and negation can change the meaning of those cues. The verification steps direct the user to a separately obtained contact or official app.
 
+Before displaying a link host, both interfaces also parse the extracted link with the browser's URL parser without visiting it. If it is malformed, or its host differs from the frozen Python parser's interpretation, the interface shows a warning instead of either host. Backslashes, some internationalized domains, and invalid ports can trigger this check. This display check does not change the frozen Python analysis or model scores; the Python endpoint still returns the original analysis output.
+
 ## Opening evaluation
 
 Before model computation, the mechanism, split, thresholds, runtime cap, and stop conditions were registered. Normalized duplicate messages were grouped. Groups whose normalized-text SHA-256 prefix modulo 5 equals 0 formed the untouched test partition; the remaining groups trained the model. Test content did not contribute to the vocabulary or threshold choice.
@@ -57,6 +59,14 @@ The browser package preserves the evaluated model and analysis-code hashes. A se
 ```sh
 node tests/runtime-parity.mjs
 ```
+
+Browser regression checks exercise the static demo and Python-server interface with synthetic links, including ambiguous hosts, invalid ports, and Unicode offsets. With Playwright for Python and Chromium already installed, run:
+
+```sh
+python3 tests/browser-links.py --chromium /usr/bin/chromium
+```
+
+This checks software behavior and preserves the opening evaluation's model and code hashes. It does not train the model, reopen the SMS holdout, or establish improved fraud detection.
 
 The holdout was evaluated once and was not used for tuning. Do not rerun `falsifier.py` against that exposed partition to justify a revised model. A new mechanism needs a separately registered evaluation.
 

@@ -22,6 +22,22 @@ function node(tag, text, className) {
   if (className) element.className = className;
   return element;
 }
+function linkForDisplay(link, characters) {
+  if (!link.host) return link;
+  const raw = characters.slice(link.start, link.end).join('');
+  try {
+    // Parsing only: never visit the URL or change the frozen Python analysis.
+    const url = new URL(/^www\./i.test(raw) ? 'https://' + raw : raw);
+    const host = url.hostname.toLowerCase().replace(/\.$/, '').replace(/^\[|\]$/g, '');
+    if (host !== link.host) return {
+      host: null, displayLabel: 'Ambiguous link host',
+      warnings: ['URL host interpretations differ. Do not open it; verify through an independently obtained contact or official app.']
+    };
+  } catch {
+    return {host: null, warnings: ['Malformed URL: do not open it']};
+  }
+  return link;
+}
 function resetResults() {
   requestId += 1; result.replaceChildren(); result.hidden = true;
   document.querySelector('#empty').hidden = false; error.hidden = true;
@@ -53,8 +69,10 @@ form.addEventListener('submit', async event => {
     }
     result.append(node('h3','Link hosts'));
     if (!data.links.length) result.append(node('p','No supported web links found.'));
-    for (const link of data.links) {
-      const row = node('div','','link'); row.append(node('strong',link.host || 'Malformed link'));
+    const characters = Array.from(message.value); // Python offsets count Unicode code points.
+    for (const originalLink of data.links) {
+      const link = linkForDisplay(originalLink, characters);
+      const row = node('div','','link'); row.append(node('strong',link.displayLabel || link.host || 'Malformed link'));
       row.append(node('span','Sender authenticity remains unverified.'));
       for (const warning of link.warnings) row.append(node('p',warning,'warning'));
       result.append(row);
